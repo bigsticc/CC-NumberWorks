@@ -26,6 +26,21 @@ return {
         table.insert(s, a % b)
     end,
  
+    -- Boolean
+    ["and"] = function(s)
+        local b = table.remove(s)
+        local a = table.remove(s)
+        table.insert(s, (a and b))
+    end,
+    ["or"] = function(s)
+        local b = table.remove(s)
+        local a = table.remove(s)
+        table.insert(s, (a or b))
+    end,
+    ["not"] = function(s)
+        local a = table.remove(s)
+    end,
+
     -- Comparison
     [">"] = function(s)
         local b = table.remove(s)
