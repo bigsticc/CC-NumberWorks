@@ -10,6 +10,8 @@ function eval(source)
             table.insert(Stack, tonumber(token))
         elseif token:sub(1, 1) == "#" then
             table.insert(Stack, token:sub(2))
+        elseif token:sub(1, 1) == '"' then
+            table.insert(Stack, token:sub(2, #token - 1))
         elseif Functions[token] ~= nil then
             Functions[token](Stack)
         elseif Dictionary[token] ~= nil then
@@ -28,6 +30,8 @@ end
 local function tokenize(str)
     local tokens = {}
     local buffer = ""
+    local inQuotes = false
+    local quoteChar = nil
     
     local function append()
        if buffer ~= "" then
@@ -37,14 +41,29 @@ local function tokenize(str)
     end
     
     for c in str:gmatch "." do
-        if c == '{' or c == '}' then
-            append()
-            table.insert(tokens, c)
-            
-        elseif c:match("[%w%p]") ~= nil then
-            buffer = buffer .. c
-        elseif c:match("%s") ~= nil then
-            append()
+        if inQuotes then 
+            if c == quoteChar then
+                buffer = buffer .. c
+                append()
+                inQuotes = false
+                quoteChar = nil
+            else
+                buffer = buffer .. c
+            end
+        else
+            if c == '{' or c == '}' then
+                append()
+                table.insert(tokens, c)
+            elseif c == '"' or c == "'" then
+                append()
+                buffer = buffer .. c
+                inQuotes = true
+                quoteChar = c
+            elseif c:match("[%w%p]") ~= nil then
+                buffer = buffer .. c
+            elseif c:match("%s") ~= nil then
+                append()
+            end
         end
     end
     append()
