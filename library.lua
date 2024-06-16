@@ -185,8 +185,11 @@ return {
     -- Utility 
     ["."] = function(s)
         local a = table.remove(s)
-        write(a)
-        write("\n")
+        if type(a) == "boolean" then
+            print(a and "true" or "false")
+        else
+            print(a)
+        end
     end,
     [".s"] = function(s)
         write(textutils.serialize(s))
