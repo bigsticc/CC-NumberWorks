@@ -14,6 +14,12 @@ function eval(source)
             Functions[token](Stack)
         elseif Dictionary[token] ~= nil then
             eval(Dictionary[token])
+        else
+            term.setTextColor(colors.red)
+            print("Unknown token: "..token)
+            term.setTextColor(colors.white)
+
+            return
         end
     end
 end
