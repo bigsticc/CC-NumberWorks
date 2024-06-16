@@ -27,21 +27,22 @@ function eval(source)
 end
  
 -- Reading raw text
-local function tokenize(str)
-    local tokens = {}
+local function parse(str)
+    local stack = {}
+    local current_list = {}
     local buffer = ""
     local inQuotes = false
     local quoteChar = nil
-    
+
     local function append()
-       if buffer ~= "" then
-            table.insert(tokens, buffer)
+        if buffer ~= "" then
+            table.insert(current_list, buffer)
             buffer = ""
-        end 
+        end
     end
-    
+
     for c in str:gmatch "." do
-        if inQuotes then 
+        if inQuotes then
             if c == quoteChar then
                 buffer = buffer .. c
                 append()
@@ -51,9 +52,15 @@ local function tokenize(str)
                 buffer = buffer .. c
             end
         else
-            if c == '{' or c == '}' then
+            if c == '{' then
                 append()
-                table.insert(tokens, c)
+                table.insert(stack, current_list)
+                current_list = {}
+            elseif c == '}' then
+                append()
+                local last = table.remove(stack)
+                table.insert(last, current_list)
+                current_list = last
             elseif c == '"' or c == "'" then
                 append()
                 buffer = buffer .. c
@@ -67,28 +74,14 @@ local function tokenize(str)
         end
     end
     append()
- 
-    return tokens
-end
- 
-local function parse(str)
-    local stack = {}
-    local current_list = {}
-    local tokens = tokenize(str)
- 
-    for _, token in ipairs(tokens) do
-        if token == "{" then
-            table.insert(stack, current_list)
-            current_list = {}
-        elseif token == "}" then
-            local last = table.remove(stack)
-            table.insert(last, current_list)
-            current_list = last
-        else 
-            table.insert(current_list, token)
-        end
+
+    -- Handle the case where the input string does not have balanced braces
+    while #stack > 0 do
+        local last = table.remove(stack)
+        table.insert(last, current_list)
+        current_list = last
     end
- 
+
     return current_list
 end
  
