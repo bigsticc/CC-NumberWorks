@@ -57,9 +57,10 @@ local function parse(str)
 end
 
 -- main
- 
+local interp = Interpreter:new() 
+
 term.setBackgroundColor(colors.blue)
-readCode("clear")
+interp:readCode(parse("clear"))
  
  
 while true do 
@@ -67,5 +68,5 @@ while true do
     local text = read()
     if text == "quit" then break end
  
-    readCode(text)
+    interp:readCode(parse(text))
 end
