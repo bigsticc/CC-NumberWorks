@@ -23,7 +23,7 @@ function Interpreter:evaluate(code)
         elseif self.dict[token] ~= nil then
             self:evaluate(self.dict[token])
         else
-            self.print("Unknown token: "..token)
+            print("Unknown token: "..token)
             return
         end
     end
@@ -38,7 +38,7 @@ function Interpreter:saveDict()
         file.write(content)
         file.close()
     else
-        self.print("Could not open dictionary file.")
+        print("Could not open dictionary file.")
     end
 end
 
@@ -50,7 +50,7 @@ function Interpreter:readDict()
         self.dict = textutils.unserialise(content)
         file.close()
     else
-        self.print("No dictionary file found for user.")
+        print("No dictionary file found for user.")
     end
 
 end
