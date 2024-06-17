@@ -62,7 +62,7 @@ end
 local interp = Interpreter:new() 
 
 term.setBackgroundColor(colors.blue)
-interp:readCode(parse("clear"))
+interp:evaluate(parse("clear"))
  
  
 while true do 
@@ -70,5 +70,5 @@ while true do
     local text = read()
     if text == "quit" then break end
  
-    interp:readCode(parse(text))
+    interp:evaluate(parse(text))
 end
