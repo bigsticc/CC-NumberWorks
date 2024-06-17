@@ -1,3 +1,5 @@
+Interpreter = require "interpreter"
+
 local function parse(str)
     local stack = {}
     local current_list = {}
