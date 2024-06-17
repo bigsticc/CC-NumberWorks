@@ -19,7 +19,7 @@ A side effect of procedures is that we can now implement control flow using simp
 
 ## Installing
 
-To install, download a git clone tool (like [this one by SquidDev](https://gist.githubusercontent.com/SquidDev/e0f82765bfdefd48b0b15a5c06c0603b/raw/clone.min.lua)), then clone this repository. Here's an example:
+To install, download a git clone tool (like [this one by SquidDev](https://gist.github.com/SquidDev/e0f82765bfdefd48b0b15a5c06c0603b)), then clone this repository. Here's an example:
 
 ```shell
 wget https://gist.githubusercontent.com/SquidDev/e0f82765bfdefd48b0b15a5c06c0603b/raw/clone.min.lua
