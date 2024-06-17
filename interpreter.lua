@@ -29,8 +29,8 @@ function Interpreter:evaluate(code)
     end
 end
 
-function Interpreter:saveDict(name)
-    local filename = "saves/" .. name .. "_dict.lua"
+function Interpreter:saveDict()
+    local filename = "saves/_dict.lua"
     local file = fs.open(filename, "w")
 
     if file then
@@ -42,8 +42,8 @@ function Interpreter:saveDict(name)
     end
 end
 
-function Interpreter:readDict(name)
-    local filename = "saves/" .. name .. "_dict.lua"
+function Interpreter:readDict()
+    local filename = "saves/_dict.lua"
     local file = fs.open(filename, "r")
     if file then
         local content = file.readAll()

@@ -89,14 +89,12 @@ return {
         local name = table.remove(int.stack)
  
         int.dict[name] = body
-
-        print("Added word '" .. name .. "' to private dictionary")
+        int:saveDict()
     end,
     ["undef"] = function(int)
         local name = table.remove(int.stack)
         int.dict[name] = nil
-
-        print("Removed word '" .. name .. "' from private dictionary")
+        int:saveDict()
     end,
     ["list-words"] = function(int)
         local result = ""

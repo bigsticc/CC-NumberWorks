@@ -61,10 +61,12 @@ end
 -- main
 local interp = Interpreter:new() 
 
+interp:readDict()
+
 term.setBackgroundColor(colors.blue)
 interp:evaluate(parse("clear"))
- 
- 
+
+
 while true do 
     write("$ ")
     local text = read()
