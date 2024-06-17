@@ -1,3 +1,3 @@
-interpreter.lua
-primitives.lua
-startup.lua
+client/interpreter.lua
+client/primitives.lua
+client/startup.lua
