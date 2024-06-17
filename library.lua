@@ -1,202 +1,147 @@
 return {
     -- Arithmetic operations
-    ["+"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a + b)
+    ["+"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a + b)
     end,
-    ["-"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a - b)
+    ["-"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a - b)
     end,
-    ["*"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a * b)
+    ["*"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a * b)
     end,
-    ["/"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a / b)
+    ["/"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a / b)
     end,
-    ["%"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a % b)
+    ["%"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a % b)
     end,
  
     -- Boolean
-    ["and"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, (a and b))
+    ["and"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, (a and b))
     end,
-    ["or"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, (a or b))
+    ["or"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, (a or b))
     end,
-    ["not"] = function(s)
-        local a = table.remove(s)
+    ["not"] = function(int)
+        local a = table.remove(int.stack)
     end,
 
     -- Comparison
-    [">"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a > b)
+    [">"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a > b)
     end,
-    ["<"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a < b)
+    ["<"] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a < b)
     end,
-    [">="] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a >= b)
+    [">="] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a >= b)
     end,
-    ["<="] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a <= b)
+    ["<="] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a <= b)
     end,
-    ["="] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, a == b)
-    end,
- 
-    -- Lua math library functions
-    ["abs"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.abs(a))
-    end,
-    ["acos"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.acos(a))
-    end,
-    ["asin"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.asin(a))
-    end,
-    ["atan"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.atan(a))
-    end,
-    ["ceil"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.ceil(a))
-    end,
-    ["cos"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.cos(a))
-    end,
-    ["deg"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.deg(a))
-    end,
-    ["exp"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.exp(a))
-    end,
-    ["floor"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.floor(a))
-    end,
-    ["log"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.log(a))
-    end,
-    ["max"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, math.max(a, b))
-    end,
-    ["min"] = function(s)
-        local b = table.remove(s)
-        local a = table.remove(s)
-        table.insert(s, math.min(a, b))
-    end,
-    ["rad"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.rad(a))
-    end,
-    ["sin"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.sin(a))
-    end,
-    ["sqrt"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.sqrt(a))
-    end,
-    ["tan"] = function(s)
-        local a = table.remove(s)
-        table.insert(s, math.tan(a))
+    ["="] = function(int)
+        local b = table.remove(int.stack)
+        local a = table.remove(int.stack)
+        table.insert(int.stack, a == b)
     end,
  
     -- Stack manipulation functions
-    ["swap"] = function(s)
-        local a = table.remove(s)
-        local b = table.remove(s)
-        table.insert(s, a)
-        table.insert(s, b)
+    ["swap"] = function(int)
+        local a = table.remove(int.stack)
+        local b = table.remove(int.stack)
+        table.insert(int.stack, a)
+        table.insert(int.stack, b)
     end,
-    ["dup"] = function(s)
-        local a = s[#s]
-        table.insert(s, a)
+    ["dup"] = function(int)
+        local a = int.stack[#(int.stack)]
+        table.insert(int.stack, a)
     end,
-    ["drop"] = function(s)
-        table.remove(s)
+    ["drop"] = function(int)
+        table.remove(int.stack)
     end,
  
     -- Word definition
-    ["define"] = function(s)
-        local body = table.remove(s)
-        local name = table.remove(s)
+    ["define"] = function(int)
+        local body = table.remove(int.stack)
+        local name = table.remove(int.stack)
  
-        Dictionary[name] = body
+        int.dict[name] = body
+
+        print("Added word '" .. name .. "' to private dictionary")
     end,
-    ["undef"] = function(s)
-        local name = table.remove(s)
-        Dictionary[name] = nil
+    ["undef"] = function(int)
+        local name = table.remove(int.stack)
+        int.dict[name] = nil
+
+        print("Removed word '" .. name .. "' from private dictionary")
     end,
- 
+    ["list-words"] = function(int)
+        local result = ""
+        for k, v in pairs(int.dict) do
+            result = result .. k .. ", "
+        end
+        print(result)
+    end,
     -- Control flow
-    ["if"] = function(s)
-        local ifTrue = table.remove(s)
-        local condition = table.remove(s)
+    ["if"] = function(int)
+        local ifTrue = table.remove(int.stack)
+        local condition = table.remove(int.stack)
  
-        eval(condition)
+        int:eval(condition)
  
-        if table.remove(s) then eval(ifTrue) end
+        if table.remove(int.stack) then int:eval(ifTrue) end
     end,
-    ["ifelse"] = function(s)
-        local ifFalse = table.remove(s)
-        local ifTrue = table.remove(s)
-        local condition = table.remove(s)
+    ["ifelse"] = function(int)
+        local ifFalse = table.remove(int.stack)
+        local ifTrue = table.remove(int.stack)
+        local condition = table.remove(int.stack)
  
-        eval(condition)
+        int:eval(condition)
  
-        if table.remove(s) then eval(ifTrue) else eval(ifFalse) end
+        if table.remove(int.stack) then int:eval(ifTrue) else int:eval(ifFalse) end
+    end,
+    ["while"] = function(int)
+        local body = table.remove(int.stack)
+        local condition = table.remove(int.stack)
+
+        while int:evaluate(condition) or table.remove(int.stack) do
+            int:evaluate(body)
+        end
     end,
  
     -- Utility 
-    ["."] = function(s)
-        local a = table.remove(s)
-        if type(a) == "boolean" then
-            print(a and "true" or "false")
-        else
-            print(a)
-        end
+    ["."] = function(int)
+        local a = table.remove(int.stack)
+        print(a)
     end,
-    [".s"] = function(s)
-        write(textutils.serialize(s))
-        write("\n")
+    [".s"] = function(int)
+        print(textutils.serialize(int.stack))
     end,
-    ["clear"] = function(s)
-        term.clear()
+    ["clear"] = function(int)
         term.setCursorPos(1, 1)
-    end,
+        term.clear()
+    end, 
 }
