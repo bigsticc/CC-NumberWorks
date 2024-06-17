@@ -15,16 +15,16 @@ This works, however right now it's nothing more than a scientific calculator. To
 
 Procedures are slightly more complicated. They consist of a series of words wrapped in braces, and are pushed to the stack rather than directly executed. For example, writing `{3 5 +}` would not push 8 to the stack, but rather the code itself. You may recognize this as an anonymous function. Finally, we can establish a _dictionary_, which maps symbols to procedures, this allows us to create custom words to abstract away lengthy pipelines.
 
-A side effect of procedures is that we can now implement control flow using simple words. For example, type `{3 5 <} {#yes .} if` at the prompt. It should print "yes". Now, flip the `<` to a `>`. It should print nothing.
+A side effect of procedures is that we can now implement control flow using simple words. For example, type `{3 5 <} {"Yes" .} if` at the prompt. It should print "Yes". Now, flip the `<` to a `>`. It should print nothing.
 
 ## Installing
 
-To install, run these commands at the CraftOS terminal:
+To install, download a git clone tool (like [this one by SquidDev](https://gist.github.com/SquidDev/e0f82765bfdefd48b0b15a5c06c0603b)), then clone this repository. Here's an example:
 
 ```shell
-pastebin get ykJehDhU startup
-pastebin get wPDgmLCT library
+wget https://gist.githubusercontent.com/SquidDev/e0f82765bfdefd48b0b15a5c06c0603b/raw/clone.min.lua
+clone.min https://github.com/bigsticc/CC-NumberWorks.git temp
+cp temp/* .
+rm temp
+
 ```
-
-_p.s. if someone can figure out how to install directly from this repo that would be highly appreciated_
-
