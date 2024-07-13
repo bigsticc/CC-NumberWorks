@@ -1,61 +1,27 @@
 Interpreter = require "interpreter"
 
-local function parse(str)
-    local stack = {}
-    local current_list = {}
-    local buffer = ""
-    local inQuotes = false
-    local quoteChar = nil
-
-    local function append()
-        if buffer ~= "" then
-            table.insert(current_list, buffer)
-            buffer = ""
-        end
+function parse(str)
+    local tokens = {}
+    for token in str:gsub("{", " { "):gsub("}", " } "):gmatch("%S+") do
+        table.insert(tokens, token)
     end
 
-    for c in str:gmatch "." do
-        if inQuotes then
-            if c == quoteChar then
-                buffer = buffer .. c
-                append()
-                inQuotes = false
-                quoteChar = nil
+    local function reduce(tokens)
+        local ast = {{}}
+        for _, token in ipairs(tokens) do
+            if token == "{" then
+                table.insert(ast, {})
+            elseif token == "}" then
+                local current_expression = table.remove(ast)
+                table.insert(ast[#ast], current_expression)
             else
-                buffer = buffer .. c
-            end
-        else
-            if c == '{' then
-                append()
-                table.insert(stack, current_list)
-                current_list = {}
-            elseif c == '}' then
-                append()
-                local last = table.remove(stack)
-                table.insert(last, current_list)
-                current_list = last
-            elseif c == '"' or c == "'" then
-                append()
-                buffer = buffer .. c
-                inQuotes = true
-                quoteChar = c
-            elseif c:match("[%w%p]") ~= nil then
-                buffer = buffer .. c
-            elseif c:match("%s") ~= nil then
-                append()
+                table.insert(ast[#ast], token)
             end
         end
-    end
-    append()
-
-    -- Handle the case where the input string does not have balanced braces
-    while #stack > 0 do
-        local last = table.remove(stack)
-        table.insert(last, current_list)
-        current_list = last
+        return ast[1]
     end
 
-    return current_list
+    return reduce(tokens)
 end
 
 -- main
